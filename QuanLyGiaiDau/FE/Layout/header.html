@@ -1,0 +1,28 @@
+<header>
+    <h1>Ứng dụng của tôi</h1>
+    <div id="user-info"></div>
+    <div id="login-controls"></div>
+</header>
+<script>
+    const userInfo = document.querySelector('#user-info');
+    const loginControls = document.querySelector('#login-controls');
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user) {
+        userInfo.textContent = `Xin chào, ${user.fullName}`;
+        const logoutButton = document.createElement('button');
+        logoutButton.textContent = 'Đăng xuất';
+        logoutButton.addEventListener('click', function() {
+            sessionStorage.removeItem('user');
+            window.location.href = '/';
+        });
+        loginControls.appendChild(logoutButton);
+    } else {
+        userInfo.textContent = 'Vui lòng đăng nhập';
+        const loginButton = document.createElement('button');
+        loginButton.textContent = 'Đăng nhập';
+        loginButton.addEventListener('click', function() {
+            window.location.href = '/dang-nhap.html';
+        });
+        loginControls.appendChild(loginButton);
+    }
+</script>
